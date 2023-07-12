@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -34,9 +35,11 @@ public class CcServerApplication {
 
 	private static ServiceObmen obService;
 
+	private static ServiceOstatki ostService;
+
 
 	@Autowired
-	CcServerApplication(
+	public CcServerApplication(
 			ServiceConfigRole roleConfig,
 			ServiceConfigOperation operationConfig,
 			ServiceConfigObmen obmenConfig,
@@ -44,7 +47,8 @@ public class CcServerApplication {
 			ServiceConfigCurrency currencyConfig,
 			ServiceConfigFilial filialConfig,
 			ServiceConfigUser userConfig,
-			PasswordEncoder passwordEncoder
+			PasswordEncoder passwordEncoder,
+			ServiceConfigOstatki ostatkiConfig
 	) {
 		CcServerApplication.roleService = (ServiceRole) roleConfig.getService();
 		CcServerApplication.opService = (ServiceOperation) operationConfig.getService();
@@ -54,6 +58,7 @@ public class CcServerApplication {
 		CcServerApplication.userService = (ServiceUser) userConfig.getService();
 		CcServerApplication.passwordEncoder = passwordEncoder;
 		CcServerApplication.obService = (ServiceObmen) obmenConfig.getService();
+		CcServerApplication.ostService = (ServiceOstatki) ostatkiConfig.getService();
 	}
 
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
@@ -97,6 +102,8 @@ public class CcServerApplication {
 		obService.create(new ObmenDTO(0L, "приём"));
 		obService.create(new ObmenDTO(1L, "продажа"));
 		obService.create(new ObmenDTO(2L, "опт"));
+
+		ostService.create(new OstatkiDTO(null, 10L, new CurrencyDTO(5L, "GBP"), 100.99, new Date(), false));
 
 	}
 
