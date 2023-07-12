@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 albums by typicode.com *</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <ul></ul>
+      </div>
+    </main>
+    <script>
+      const PATH_URI = 'https://jsonplaceholder.typicode.com/albums';
+      let e = document.querySelector('.container > ul');
+ 
+      async function parseTypicodeAlbums() {
+        let request = await fetch(PATH_URI);
+        let response = await request.json();
+ 
+        response.map(({ userId, id, title }, i) => {
+          e.insertAdjacentHTML(
+            'beforeend',
+            `<li id="album_${id}" style="padding: .5rem 0;">
+                    <div class="album__user-id">userId: ${userId}<div/>
+                    <div class="album__id">Id: ${id}<div/>
+                    <div class="album__title">Title: ${title}<div/>
+                   </li>`
+          );
+        });
+      }
+ 
+      parseTypicodeAlbums();
+    </script>
+  </body>
+</html>
