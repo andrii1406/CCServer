@@ -103,6 +103,7 @@ public class CcServerApplication {
 		obService.create(new ObmenDTO(1L, "продажа"));
 		obService.create(new ObmenDTO(2L, "опт"));
 
+
 		ostService.create(new OstatkiDTO(null, 10L, new CurrencyDTO(5L, "GBP"), 100.99, new Date(), false));
 
 	}
