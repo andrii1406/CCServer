@@ -31,5 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-!/OP.sqlite
-!/.mvn/
+.mvn/
+OP.sqlite
